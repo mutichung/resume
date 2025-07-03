@@ -1,0 +1,31 @@
+name: Compile to PDF
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    - name: Compile with latex-action
+      uses: xu-cheng/latex-action@3.3.0
+      with:
+        root_file: |
+            main.tex
+    - name: Upload PDF file
+      uses: actions/upload-artifact@v4
+      with:
+        name: resume
+        path: main.pdf
+    - name: Release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: main.pdf
