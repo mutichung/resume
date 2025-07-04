@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write  # Changed from 'read' to 'write' to allow tagging
   id-token: write
 
 jobs:
@@ -15,17 +15,45 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # Fetch full history for proper tagging
+
+    - name: Generate tag
+      id: tag
+      run: |
+        # Create a timestamp-based tag
+        TAG="resume-$(date +'%Y%m%d-%H%M%S')"
+        echo "tag=$TAG" >> $GITHUB_OUTPUT
+        echo "Generated tag: $TAG"
+
+    - name: Create and push tag
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git tag ${{ steps.tag.outputs.tag }}
+        git push origin ${{ steps.tag.outputs.tag }}
+
     - name: Compile with latex-action
       uses: xu-cheng/latex-action@3.3.0
       with:
         root_file: |
             main.tex
+
     - name: Upload PDF file
       uses: actions/upload-artifact@v4
       with:
         name: resume
         path: main.pdf
+
     - name: Release
       uses: softprops/action-gh-release@v2
       with:
+        tag_name: ${{ steps.tag.outputs.tag }}
+        name: "Resume ${{ steps.tag.outputs.tag }}"
         files: main.pdf
+        body: |
+          Automated resume compilation
+
+          **Commit**: ${{ github.sha }}
+          **Branch**: ${{ github.ref_name }}
+          **Build Time**: ${{ steps.tag.outputs.tag }}
