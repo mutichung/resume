@@ -28,7 +28,7 @@ jobs:
       id: tag
       run: |
         # Create a timestamp-based tag
-        TAG="resume-$(date +'%Y%m%d-%H%M%S')"
+        TAG="$(date +'%Y%m%d-%H%M%S')"
         echo "tag=$TAG" >> $GITHUB_OUTPUT
         echo "Generated tag: $TAG"
 
@@ -71,7 +71,7 @@ jobs:
       uses: softprops/action-gh-release@v2
       with:
         tag_name: ${{ needs.create-tag.outputs.tag }}
-        name: "Resume ${{ needs.create-tag.outputs.tag }}"
+        name: "Resume @ ${{ needs.create-tag.outputs.tag }}"
         files: main.pdf
         body: |
           Automated resume compilation
