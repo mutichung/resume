@@ -93,7 +93,7 @@ Machine Learning Engineer specialized in model training, compression, and optimi
   location: "Ann Arbor, MI",
   dates: dates-helper(start-date: "Sep 2019 ", end-date: "Dec 2020"),
   degree: "Master's of Science, Robotics",
-  gpa: "4.0/4.0"
+  gpa: "4.0/4.0",
   // Uncomment the line below if you want edu formatting to be consistent with everything else
   consistent: true,
 )
@@ -102,6 +102,7 @@ Machine Learning Engineer specialized in model training, compression, and optimi
   institution: "National Taiwan University",
   location: "Taipei, Taiwan",
   dates: dates-helper(start-date: "Sep 2014", end-date: "Jun 2018"),
-  degree: "Bachelor's of Science, Mechanical Engineering | GPA: 4.13/4.3",
+  degree: "Bachelor's of Science, Mechanical Engineering",
+  gpa: "4.13/4.3",
   consistent: true,
 )
