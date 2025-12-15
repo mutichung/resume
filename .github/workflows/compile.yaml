@@ -45,13 +45,12 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-
-    - name: Compile with latex-action
-      uses: xu-cheng/latex-action@3.3.0
+    - name: Get typst
+      uses: typst-community/setup-typst@v4
       with:
-        root_file: |
-            main.tex
-
+        cache-dependency-path: requirements.typ
+    - name: Compile pdf
+      run: typst compile main.typ main.pdf
     - name: Upload PDF file
       uses: actions/upload-artifact@v4
       with:
