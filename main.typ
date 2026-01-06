@@ -43,7 +43,7 @@
 
 == Summary
 
-Machine Learning Engineer specialized in model training, compression, and optimization for AI accelerators. Proven ability to build production-grade Python libraries and training pipelines for large-scale model fine-tuning and compression (CNN, LLM). Skilled in distributed training and hardware-aware algorithm design, with a track record of deploying tools that significantly reduce model size while maintaining accuracy.
+Machine Learning Engineer specializing in post-training quantization and compression-aware training for large language models on hardware-constrained platforms. Experienced in designing PTQ pipelines, hybrid PTQ–QAT methods, and distributed fine-tuning systems that enable low-bit (e.g., INT4) deployment with minimal accuracy loss. Strong track record of building production-grade Python libraries, debugging complex model integrations, and translating research ideas into deployable systems for AI accelerators.
 
 == Skills
 
@@ -60,6 +60,22 @@ Machine Learning Engineer specialized in model training, compression, and optimi
   dates: dates-helper(start-date: "Jul 2021", end-date: "Present"),
 )
 
+#project(name: "Post-Training Quantization for Large Language Models")
+- Designed and evaluated post-training quantization pipelines for LLM/VLM/multimodal models, with emphasis on accuracy robustness under strict hardware constraints.
+- Studied and applied transformation-based techniques (e.g., Hadamard-based rotations, QuIP-, SpinQuant-, and FlatQuant-style methods) to enable sub-4-bit compression on models that fail with standard methods.
+- Led end-to-end model integration efforts, including debugging non-standard model implementations, resolving numerical issues, and adapting architectures for quantized inference.
+- Built evaluation workflows to diagnose quantization-induced failure modes, refine calibration strategies, and guide method selection across models and tasks.
+
+#project(name: "Compression-Aware Training for LLMs")
+- Developed a pruning- and quantization-aware training library with support for DeepSpeed ZeRO-3 to enable memory-efficient fine-tuning at scale.
+- Combined post-training and training-time compression techniques—including GPTQ, QAT, LoRA, and knowledge distillation—into unified training pipelines to improve accuracy recovery.
+- Achieved up to 87.5% model size reduction (50% pruning + INT4 quantization) on LLaMA models with minimal accuracy degradation.
+
+#project(name: "Activation Sparsity in LLMs")
+- Independently led research on activation sparsity across various models, achieving 70-90% sparsity in MLP layers via continual pretraining.
+- Implemented methods like ReLUfication, Deja Vu, TurboSparse, and Q-Sparse using PyTorch and Triton.
+- Developed a predictor network to identify active MLP channels at inference, enabling selective weight loading and IO-bounded acceleration with minimal accuracy loss.
+
 #project(
   name: "Cross-Framework Pruning Library",
   // Role is optional
@@ -69,22 +85,10 @@ Machine Learning Engineer specialized in model training, compression, and optimi
   // URL is also optional
   // url: "hyperschedule.io",
 )
-- Led design and development of a framework-agnostic model pruning library, enabling unified APIs and features across TensorFlow 1/2 and PyTorch.
+- Led design and development of a framework-agnostic model pruning library, enabling unified APIs and features across TensorFlow 1, 2, and PyTorch.
 - Implemented structured and unstructured pruning using L1/L2-norm criteria, with support for gradual pruning schedules and layer-wise sparsity analysis with respect to hardware constraints.
 - Achieved 50-90% model sparsity with $<1%$ accuracy loss, allowing hardware acceleration on SoCs.
-- Complete CI support built: unit tests, end-to-end regression tests, and Sphinx-based documentation with runnable Jupyter examples.
-
-#project(name: "Compression-Aware Training for LLMs")
-- Developed compression-aware training library with support for DeepSpeed ZeRO-3 to enable VRAM-efficient fine-tuning of LLMs.
-- Integrated a wide range of post-training and training-time compression techniques, including GPTQ, SparseGPT, Wanda, QAT, OmniQuant, LoRA/qLoRA, knowledge distillation.
-- Successfully compressed LLaMA models to 12.5% of original size with minimal accuracy degradation.
-- Researched and created deployment guides for clients with limited compute budgets, covering training strategy, compression trade-offs, and hardware-aware optimization.
-- Worked with tools such as Triton and liger-kernel to optimize training throughput and resolve memory bottlenecks.
-
-#project(name: "Activation Sparsity in LLMs")
-- Independently led research on activation sparsity in LLaMA-2, Mistral-7B, and Qwen-2.5, achieving 70-90% sparsity in MLP layers via continual pretraining.
-- Integrated methods like ReLUfication, Deja Vu, TurboSparse, and Q-Sparse using PyTorch and Triton.
-- Developed a predictor network to identify active MLP channels at inference, enabling selective weight loading and IO-bound acceleration with minimal accuracy loss.
+- Built complete CI: unit tests, end-to-end regression tests, and Sphinx-based documentation with executable Jupyter notebook examples.
 
 == Education
 
